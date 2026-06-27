@@ -39,7 +39,8 @@ WITH InvoiceBookingLink AS (
                 ELSE UPPER(TRIM(ai.ItemName))
             END AS nvarchar(max)), N', ') AS CampaignCodes,
         COUNT(DISTINCT ai.AccountingItemId) AS CampaignUses,
-        SUM(ISNULL(ai.TotalPrice, 0)) AS CampaignAmount
+        SUM(ISNULL(ai.TotalPrice, 0)) AS CampaignAmountRaw,
+        SUM(-ABS(ISNULL(ai.TotalPrice, 0))) AS CampaignAmount
     FROM AccountingBooking AS ai
     LEFT JOIN dbo.Item AS campaignItem
         ON campaignItem.ItemId = ai.ItemId
@@ -94,8 +95,10 @@ SELECT
     cr.CampaignCodesOriginal,
     cr.CampaignCodes,
     cr.CampaignUses,
+    cr.CampaignAmountRaw,
     cr.CampaignAmount,
     bv.BookingPositiveValue,
+    bv.BookingPositiveValue + cr.CampaignAmount AS BookingValueAfterCampaign,
 
     cal.CalendarYear AS ArrivalYear,
     cal.MonthNumber AS ArrivalMonthNumber,
@@ -135,8 +138,10 @@ SELECT
     CampaignCodesOriginal,
     CampaignCodes,
     CampaignUses,
+    CampaignAmountRaw,
     CampaignAmount,
-    BookingPositiveValue
+    BookingPositiveValue,
+    BookingValueAfterCampaign
 FROM dbo.vw_CampaignAccountingBookings
 ORDER BY ArrivalDate DESC, BookingId;
 

@@ -48,7 +48,8 @@ WITH InvoiceBookingLink AS (
             ELSE UPPER(TRIM(ai.ItemName))
         END AS CampaignCode,
         COUNT(DISTINCT ai.AccountingItemId) AS CampaignUses,
-        SUM(ISNULL(ai.TotalPrice, 0)) AS CampaignAmount
+        SUM(ISNULL(ai.TotalPrice, 0)) AS CampaignAmountRaw,
+        SUM(-ABS(ISNULL(ai.TotalPrice, 0))) AS CampaignAmount
     FROM AccountingBooking AS ai
     LEFT JOIN dbo.Booking AS b
         ON b.BookingId = ai.LinkedBookingId
@@ -115,6 +116,7 @@ SELECT
     COUNT(DISTINCT BookingId) AS SoldBookings,
     COUNT(DISTINCT CustomerId) AS UniqueCustomers,
     SUM(CampaignUses) AS CampaignUses,
+    SUM(CampaignAmountRaw) AS CampaignAmountRaw,
     SUM(CampaignAmount) AS CampaignAmount,
     SUM(BookingPositiveValue) AS BookingPositiveValue,
     SUM(BookingPositiveValue) + SUM(CampaignAmount) AS BookingValueAfterCampaign,
@@ -144,6 +146,7 @@ SELECT
     SoldBookings,
     UniqueCustomers,
     CampaignUses,
+    CampaignAmountRaw,
     CampaignAmount,
     BookingPositiveValue,
     BookingValueAfterCampaign,
