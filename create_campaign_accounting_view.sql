@@ -22,7 +22,6 @@ WITH InvoiceBookingLink AS (
     SELECT
         ai.LinkedBookingId AS BookingId,
         CASE WHEN ai.LinkedBookingId IS NULL THEN ai.AccountingItemId END AS UnlinkedCampaignAccountingItemId,
-        STRING_AGG(CAST(ai.KeyType AS nvarchar(max)), N', ') AS CampaignKeyTypes,
         STRING_AGG(CAST(ai.ItemId AS nvarchar(max)), N', ') AS CampaignItemIds,
         STRING_AGG(CAST(CASE
             WHEN UPPER(TRIM(ai.ItemId)) = 'COUPONBO' OR UPPER(TRIM(ai.ItemName)) LIKE N'%KANONDEAL%' THEN N'BoendeKampanj'
@@ -38,14 +37,17 @@ WITH InvoiceBookingLink AS (
                     COALESCE(NULLIF(TRIM(SUBSTRING(UPPER(TRIM(ai.ItemName)), LEN(N'RABATTKOD ') + 1, 4000)), ''), N'(SAKNAR KAMPANJKOD)')
                 ELSE UPPER(TRIM(ai.ItemName))
             END AS nvarchar(max)), N', ') AS CampaignCodes,
-        COUNT(DISTINCT ai.AccountingItemId) AS CampaignUses,
         SUM(ISNULL(ai.TotalPrice, 0)) AS CampaignAmountRaw,
         SUM(-ABS(ISNULL(ai.TotalPrice, 0))) AS CampaignAmount
     FROM AccountingBooking AS ai
+    LEFT JOIN dbo.Booking AS bFilter
+        ON bFilter.BookingId = ai.LinkedBookingId
     LEFT JOIN dbo.Item AS campaignItem
         ON campaignItem.ItemId = ai.ItemId
     WHERE
         ai.KeyType IN ('B', 'F', 'G')
+        -- Reporting starts at 2025-01-01 because earlier imported data is incomplete/backfill only.
+        AND COALESCE(CAST(bFilter.FromDate AS date), CAST(ai.FromDate AS date)) >= '2025-01-01'
         AND (
             UPPER(TRIM(ai.ItemId)) IN ('COUPON', 'COUPONBO')
             OR UPPER(TRIM(ai.ItemName)) LIKE N'%KANONDEAL%'
@@ -68,7 +70,6 @@ WITH InvoiceBookingLink AS (
 SELECT
     cr.BookingId,
     CASE WHEN b.BookingId IS NULL THEN 0 ELSE 1 END AS BookingRecordFound,
-    b.Deleted AS BookingDeleted,
     b.BookingImportStatus,
     b.CustomerId,
     b.BookingItemId,
@@ -89,12 +90,10 @@ SELECT
     mc.MainCategoryId,
     mc.MainCategoryName,
 
-    cr.CampaignKeyTypes,
     cr.CampaignItemIds,
     cr.CampaignTypes,
     cr.CampaignCodesOriginal,
     cr.CampaignCodes,
-    cr.CampaignUses,
     cr.CampaignAmountRaw,
     cr.CampaignAmount,
     bv.BookingPositiveValue,
@@ -126,18 +125,15 @@ GO
 SELECT
     BookingId,
     BookingRecordFound,
-    BookingDeleted,
     BookingImportStatus,
     ArrivalDate,
     DepartureDate,
     BookingItemTypeDescription,
     MainCategoryName,
-    CampaignKeyTypes,
     CampaignItemIds,
     CampaignTypes,
     CampaignCodesOriginal,
     CampaignCodes,
-    CampaignUses,
     CampaignAmountRaw,
     CampaignAmount,
     BookingPositiveValue,

@@ -47,10 +47,14 @@ WITH InvoiceBookingLink AS (
         ai.CreatedAt AS CampaignRowCreatedAt,
         ai.UpdatedAt AS CampaignRowUpdatedAt
     FROM AccountingBooking AS ai
+    LEFT JOIN dbo.Booking AS bFilter
+        ON bFilter.BookingId = ai.LinkedBookingId
     LEFT JOIN dbo.Item AS item
         ON item.ItemId = ai.ItemId
     WHERE
         ai.KeyType IN ('B', 'F', 'G')
+        -- Reporting starts at 2025-01-01 because earlier imported data is incomplete/backfill only.
+        AND COALESCE(CAST(bFilter.FromDate AS date), CAST(ai.FromDate AS date)) >= '2025-01-01'
         AND (
             UPPER(TRIM(ai.ItemId)) IN ('COUPON', 'COUPONBO')
             OR UPPER(TRIM(ai.ItemName)) LIKE N'%KANONDEAL%'
@@ -117,4 +121,3 @@ ORDER BY
     CampaignCode,
     BookingId,
     CampaignAccountingItemId;
-
