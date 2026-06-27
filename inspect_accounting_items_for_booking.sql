@@ -1,7 +1,8 @@
 -- Shows AccountingItem rows connected to one booking.
 -- Change @BookingId when you want to inspect another booking.
 
-DECLARE @BookingId int = 1379742;
+DECLARE @BookingId int;
+SET @BookingId = 1379742;
 
 SELECT
     b.BookingId,
