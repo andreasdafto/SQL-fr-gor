@@ -6,7 +6,7 @@ BEGIN
         Description nvarchar(100) NOT NULL,
         BedsToMake int NOT NULL,
         CleaningMinutes int NOT NULL,
-        CleaningPeople decimal(4,1) NOT NULL
+        CleaningWindowHours decimal(4,1) NOT NULL
     );
 END;
 GO

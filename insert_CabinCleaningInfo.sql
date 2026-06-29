@@ -11,16 +11,16 @@ USING (VALUES
     (52, N'Båtplats hyr ej ut', 0, 0, CAST(0 AS decimal(4,1))),
     (55, N'Säsongstomt kategori 1', 0, 0, CAST(0 AS decimal(4,1))),
     (18, N'Tälttomt extra', 0, 0, CAST(0 AS decimal(4,1))),
-    (20, N'Stuga Döskallebyn 4 pers', 0, 15, CAST(4.5 AS decimal(4,1))),
-    (22, N'Stuga Vrakbyn 4 pers', 0, 15, CAST(4.5 AS decimal(4,1))),
-    (26, N'Stuga Krutbyn 4 pers', 4, 40, CAST(4.5 AS decimal(4,1))),
-    (28, N'Stuga Saltbyn 4 pers', 4, 45, CAST(4.5 AS decimal(4,1))),
-    (30, N'Stuga Sjölia 4 pers', 4, 50, CAST(4.5 AS decimal(4,1))),
-    (32, N'Stuga Skeppsbyn 4 pers', 4, 50, CAST(4.5 AS decimal(4,1))),
-    (34, N'Stuga Piratbyn 4 pers', 4, 50, CAST(4.5 AS decimal(4,1))),
-    (36, N'Stuga Piratbyn 6 pers', 6, 60, CAST(4.5 AS decimal(4,1))),
-    (38, N'Stuga Solhöjden 6 pers', 6, 70, CAST(4.5 AS decimal(4,1))),
-    (40, N'Stuga Kaptensbyn 8 pers', 8, 90, CAST(4.5 AS decimal(4,1))),
+    (20, N'Stuga Döskallebyn 4 pers', 0, 15, CAST(5.0 AS decimal(4,1))),
+    (22, N'Stuga Vrakbyn 4 pers', 0, 15, CAST(5.0 AS decimal(4,1))),
+    (26, N'Stuga Krutbyn 4 pers', 4, 30, CAST(5.0 AS decimal(4,1))),
+    (28, N'Stuga Saltbyn 4 pers', 4, 30, CAST(5.0 AS decimal(4,1))),
+    (30, N'Stuga Sjölia 4 pers', 4, 60, CAST(5.0 AS decimal(4,1))),
+    (32, N'Stuga Skeppsbyn 4 pers', 4, 60, CAST(5.0 AS decimal(4,1))),
+    (34, N'Stuga Piratbyn 4 pers', 4, 60, CAST(5.0 AS decimal(4,1))),
+    (36, N'Stuga Piratbyn 6 pers', 6, 70, CAST(5.0 AS decimal(4,1))),
+    (38, N'Stuga Solhöjden 6 pers', 6, 70, CAST(5.0 AS decimal(4,1))),
+    (40, N'Stuga Kaptensbyn 8 pers', 8, 90, CAST(5.0 AS decimal(4,1))),
     (50, N'Båtplats säsong/stor', 0, 0, CAST(0 AS decimal(4,1))),
     (51, N'Båtplats säsong/liten', 0, 0, CAST(0 AS decimal(4,1))),
     (100, N'Wellness/bastu/grill', 0, 0, CAST(0 AS decimal(4,1))),
@@ -41,13 +41,13 @@ USING (VALUES
     (49, N'Gästhamn', 0, 0, CAST(0 AS decimal(4,1))),
     (14, N'Tälttomt M Söderviken', 0, 0, CAST(0 AS decimal(4,1))),
     (48, N'Personalbostäder', 0, 0, CAST(0 AS decimal(4,1))),
-    (19, N'Stuga Döskallebyn 2 pers ny', 0, 15, CAST(4.5 AS decimal(4,1))),
+    (19, N'Stuga Döskallebyn 2 pers ny', 0, 15, CAST(5.0 AS decimal(4,1))),
     (8, N'Camping/Husbilstomt XL Höglandet', 0, 0, CAST(0 AS decimal(4,1))),
     (808, N'Julbord Fredag', 0, 0, CAST(0 AS decimal(4,1))),
     (7, N'Camping/Husbilstomt L Höglandet', 0, 0, CAST(0 AS decimal(4,1))),
     (200, N'Present kort', 0, 0, CAST(0 AS decimal(4,1))),
     (115, N'Scen', 0, 0, CAST(0 AS decimal(4,1))),
-    (43, N'Stuga unik 4 pers', 0, 50, CAST(4.5 AS decimal(4,1))),
+    (43, N'Stuga unik 4 pers', 0, 50, CAST(5.0 AS decimal(4,1))),
     (120, N'Padeltennis', 0, 0, CAST(0 AS decimal(4,1))),
     (2, N'Campingtomt M Mittlandet', 0, 0, CAST(0 AS decimal(4,1))),
     (810, N'Julbord Familj', 0, 0, CAST(0 AS decimal(4,1))),
@@ -60,7 +60,7 @@ USING (VALUES
     (9, N'Husbilstomt L Norrviken', 0, 0, CAST(0 AS decimal(4,1))),
     (11, N'Tälttomt Söderviken', 0, 0, CAST(0 AS decimal(4,1))),
     (16, N'Campingtomt unik', 0, 0, CAST(0 AS decimal(4,1))),
-    (41, N'Kaparvillan 8 pers', 8, 120, CAST(4.5 AS decimal(4,1))),
+    (41, N'Kaparvillan 8 pers', 8, 140, CAST(5.0 AS decimal(4,1))),
     (59, N'Säsongstomt Borttagen', 0, 0, CAST(0 AS decimal(4,1))),
     (17, N'Husbilstomt unik', 0, 0, CAST(0 AS decimal(4,1))),
     (6, N'Camping/Husbilstomt M Norrviken', 0, 0, CAST(0 AS decimal(4,1))),
@@ -70,20 +70,20 @@ USING (VALUES
     (750, N'Bistro', 0, 0, CAST(0 AS decimal(4,1))),
     (54, N'Säsongstomt kategori A', 0, 0, CAST(0 AS decimal(4,1))),
     (80, N'Markarrende', 0, 0, CAST(0 AS decimal(4,1))),
-    (46, N'Hotellet', 4, 50, CAST(4.5 AS decimal(4,1))),
-    (45, N'Villan 6 pers', 0, 50, CAST(4.5 AS decimal(4,1))),
-    (44, N'Stuga unik 4 pers/2 sovrum', 0, 50, CAST(4.5 AS decimal(4,1)))
-) AS source (BookingItemTypeId, Description, BedsToMake, CleaningMinutes, CleaningPeople)
+    (46, N'Hotellet', 4, 50, CAST(5.0 AS decimal(4,1))),
+    (45, N'Villan 6 pers', 0, 50, CAST(5.0 AS decimal(4,1))),
+    (44, N'Stuga unik 4 pers/2 sovrum', 0, 50, CAST(5.0 AS decimal(4,1)))
+) AS source (BookingItemTypeId, Description, BedsToMake, CleaningMinutes, CleaningWindowHours)
 ON target.BookingItemTypeId = source.BookingItemTypeId
 WHEN MATCHED THEN
     UPDATE SET
         Description = source.Description,
         BedsToMake = source.BedsToMake,
         CleaningMinutes = source.CleaningMinutes,
-        CleaningPeople = source.CleaningPeople
+        CleaningWindowHours = source.CleaningWindowHours
 WHEN NOT MATCHED BY TARGET THEN
-    INSERT (BookingItemTypeId, Description, BedsToMake, CleaningMinutes, CleaningPeople)
-    VALUES (source.BookingItemTypeId, source.Description, source.BedsToMake, source.CleaningMinutes, source.CleaningPeople);
+    INSERT (BookingItemTypeId, Description, BedsToMake, CleaningMinutes, CleaningWindowHours)
+    VALUES (source.BookingItemTypeId, source.Description, source.BedsToMake, source.CleaningMinutes, source.CleaningWindowHours);
 
 COMMIT;
 

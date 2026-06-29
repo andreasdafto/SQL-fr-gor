@@ -6,7 +6,7 @@ SELECT
     bit.SiteId,
     cci.BedsToMake,
     cci.CleaningMinutes,
-    cci.CleaningPeople,
+    cci.CleaningWindowHours,
     CASE WHEN ISNULL(cci.CleaningMinutes, 0) > 0 THEN 1 ELSE 0 END AS IsCleaningUnit
 FROM dbo.BookingItemType AS bit
 INNER JOIN dbo.CabinCleaningInfo AS cci

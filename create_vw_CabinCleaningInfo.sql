@@ -5,7 +5,7 @@ SELECT
     Description,
     BedsToMake,
     CleaningMinutes,
-    CleaningPeople
+    CleaningWindowHours
 FROM dbo.CabinCleaningInfo
 WHERE CleaningMinutes > 0;
 GO
